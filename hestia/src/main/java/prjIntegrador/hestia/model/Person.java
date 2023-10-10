@@ -28,6 +28,9 @@ public class Person {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "active")
+    private boolean active;
+
     @Override
     public String toString() {
         return "person{" +
