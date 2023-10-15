@@ -1,6 +1,5 @@
 package prjIntegrador.hestia.payload;
 
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "PersonDTO")
 public class PersonDTO {
 
     @NotBlank

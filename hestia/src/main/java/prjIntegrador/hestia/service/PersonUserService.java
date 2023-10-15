@@ -1,12 +1,11 @@
 package prjIntegrador.hestia.service;
 
-import org.springframework.http.ResponseEntity;
-import prjIntegrador.hestia.model.Person;
+import prjIntegrador.hestia.entity.Person;
 import prjIntegrador.hestia.payload.PersonDTO;
 
 import java.util.List;
 
-public interface PersonService {
+public interface PersonUserService {
 
     public List<Person> FindAllPersons();
 
@@ -14,11 +13,8 @@ public interface PersonService {
 
     public PersonDTO createPerson(PersonDTO personDTO);
 
+    public PersonDTO updatePerson(int personId, PersonDTO personDTO);
+
     public void deletePersonById(int personId);
-
-    public PersonDTO updatePerson(int personId,PersonDTO personDTO);
-
-
-
 
 }

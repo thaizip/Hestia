@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.model;
+package prjIntegrador.hestia.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Person")
+@Table(name = "Person" , uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Person {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
