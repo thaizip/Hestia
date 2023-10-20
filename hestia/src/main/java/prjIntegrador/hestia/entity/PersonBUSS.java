@@ -1,15 +1,12 @@
 package prjIntegrador.hestia.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity @ToString
 @Table(name = "Empressa")
 public class PersonBUSS {
 
@@ -17,13 +14,13 @@ public class PersonBUSS {
     private int personBussId;
 
     @Column(name = "CNPJ")
-    private int CNPJ;
+    private String CNPJ;
 
     @Column(name = "endereco")
     private String endereco;
 
     @Column(name = "numero")
-    private int numero;
+    private String numero;
 
     @Column(name = "bairro")
     private String bairro;
@@ -32,18 +29,20 @@ public class PersonBUSS {
     private String cidade;
 
     @Column(name = "UF")
-    private char UF;
+    private String UF;
 
-    @Override
-    public String toString() {
-        return "PersonBUSS{" +
-                "personBussId=" + personBussId +
-                ", CNPJ=" + CNPJ +
-                ", endereco='" + endereco + '\'' +
-                ", numero=" + numero +
-                ", bairro='" + bairro + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", UF=" + UF +
-                '}';
-    }
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "personImg")
+    private String personImg;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "active")
+    private boolean active;
 }

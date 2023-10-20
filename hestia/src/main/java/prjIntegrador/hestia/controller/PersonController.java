@@ -41,7 +41,6 @@ public class PersonController {
     @PutMapping("/{personId}")
     public PersonDTO updatePerson(@PathVariable("personId") int personId, @RequestBody PersonDTO personDTO) {
         return personUserServiceIMPL.updatePerson(personId, personDTO);
-
     }
 
     @DeleteMapping("/{personId}")
