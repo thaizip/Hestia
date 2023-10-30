@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import prjIntegrador.hestia.entity.PersonBUSS;
 import prjIntegrador.hestia.payload.PersonBussDTO;
 import prjIntegrador.hestia.repository.PersonBussRepository;
-import prjIntegrador.hestia.util.ValitedCNPJ;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,12 +44,6 @@ public class PersonBussServiceIMPL implements PersonBussService{
 
     @Override
     public ResponseEntity<PersonBussDTO> createPersonBus(PersonBussDTO personBussDTO){
-        String cnpj = personBussDTO.getCNPJ();
-
-        if (!ValitedCNPJ.isCNPJ(cnpj)) {
-            throw new EntityNotFoundException("O CNPJ não é válido.");
-        }
-
         PersonBUSS personBUSS = new PersonBUSS();
         personBUSS.setEndereco(personBussDTO.getEndereco());
         personBUSS.setNumero(personBussDTO.getNumero());
@@ -60,8 +53,8 @@ public class PersonBussServiceIMPL implements PersonBussService{
         personBUSS.setPersonImg(personBussDTO.getPersonImg());
         personBUSS.setEmail(personBussDTO.getEmail());
         personBUSS.setPassword(personBussDTO.getPassword());
-        personBUSS.setCNPJ(cnpj);
-        personBUSS.setUF(personBussDTO.getUF());
+        personBUSS.setCnpj(personBUSS.getCnpj());
+        personBUSS.setUf(personBussDTO.getUf());
         bussRepository.save(personBUSS);
         return new ResponseEntity<>(mapper.map(personBUSS, PersonBussDTO.class), HttpStatus.CREATED);
     }

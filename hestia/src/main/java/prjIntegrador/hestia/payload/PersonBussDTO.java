@@ -3,7 +3,7 @@ package prjIntegrador.hestia.payload;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CNPJ;
-import prjIntegrador.hestia.util.ValitedCNPJ;
+
 
 @Getter @Setter
 @AllArgsConstructor
@@ -11,37 +11,39 @@ import prjIntegrador.hestia.util.ValitedCNPJ;
 @ToString
 public class PersonBussDTO {
 
-    @NotBlank @CNPJ(groups = ValitedCNPJ.class)
+    @NotNull
+    @CNPJ(message = "Cnpj is not valid")
     @Size(min = 11, max = 14,message = "The CNPJ ins't in the correct size")
-    private String CNPJ;
+    private String cnpj;
 
-    @NotBlank
+    @NotNull
     private String endereco;
 
+    @NotNull
     @Size(min = 3, max = 5,message = "O numero deve ter exatamente 5 dígitos.")
     private String numero;
 
-    @NotBlank
+    @NotNull
     private String bairro;
 
-    @NotBlank
+    @NotNull
     private String cidade;
 
-    @NotBlank
+    @NotNull
     @Size(max = 2, message = "UF deve ter no máximo 2 caracteres.")
-    private String UF;
+    private String uf;
 
-    @NotBlank
+    @NotNull
     private String name;
 
-    @NotBlank
+    @NotNull
     private String personImg;
 
-    @NotBlank
+    @NotNull
     @Email(message = "The email must be a well-formed email address")
     private String email;
 
-    @NotBlank
+    @NotNull
     private String password;
 
 }

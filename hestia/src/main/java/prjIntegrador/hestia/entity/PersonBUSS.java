@@ -14,7 +14,7 @@ public class PersonBUSS {
     private int personBussId;
 
     @Column(name = "CNPJ")
-    private String CNPJ;
+    private String cnpj;
 
     @Column(name = "endereco")
     private String endereco;
@@ -29,7 +29,7 @@ public class PersonBUSS {
     private String cidade;
 
     @Column(name = "UF")
-    private String UF;
+    private String uf;
 
     @Column(name = "name")
     private String name;
