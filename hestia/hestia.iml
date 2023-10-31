@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="AdditionalModuleElements">
+    <content url="file://$MODULE_DIR$" dumb="true">
+      <sourceFolder url="file://$MODULE_DIR$/gateway/gateway/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway/gateway/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/gateway/gateway/src/test" isTestSource="true" />
+    </content>
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="f75e89f2-6482-4387-9f65-48a3979c3664" />
+  </component>
+</module>
