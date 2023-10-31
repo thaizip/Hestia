@@ -1,4 +1,4 @@
-# hestia-mobile
+# hestia
 
 **Introdução ao Projeto Hestia: O Comparador de Preços Universal**
 
