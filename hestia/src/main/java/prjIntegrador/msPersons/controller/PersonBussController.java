@@ -1,13 +1,13 @@
-package prjIntegrador.hestia.controller;
+package prjIntegrador.msPersons.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import prjIntegrador.hestia.entity.PersonBUSS;
-import prjIntegrador.hestia.payload.PersonBussDTO;
-import prjIntegrador.hestia.service.PersonBussServiceIMPL;
+import prjIntegrador.msPersons.entity.PersonBUSS;
+import prjIntegrador.msPersons.payload.PersonBussDTO;
+import prjIntegrador.msPersons.service.PersonBussServiceIMPL;
 
 import java.util.List;
 

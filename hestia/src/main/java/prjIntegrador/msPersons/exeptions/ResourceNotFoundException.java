@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.exeptions;
+package prjIntegrador.msPersons.exeptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.exeptions;
+package prjIntegrador.msPersons.exeptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

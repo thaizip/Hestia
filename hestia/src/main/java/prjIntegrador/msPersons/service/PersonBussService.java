@@ -1,8 +1,8 @@
-package prjIntegrador.hestia.service;
+package prjIntegrador.msPersons.service;
 
 import org.springframework.http.ResponseEntity;
-import prjIntegrador.hestia.entity.PersonBUSS;
-import prjIntegrador.hestia.payload.PersonBussDTO;
+import prjIntegrador.msPersons.entity.PersonBUSS;
+import prjIntegrador.msPersons.payload.PersonBussDTO;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package prjIntegrador.hestia.service;
+package prjIntegrador.msPersons.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import prjIntegrador.hestia.entity.Person;
-import prjIntegrador.hestia.payload.PersonDTO;
-import prjIntegrador.hestia.repository.PersonRepository;
+import prjIntegrador.msPersons.entity.Person;
+import prjIntegrador.msPersons.payload.PersonDTO;
+import prjIntegrador.msPersons.repository.PersonRepository;
 
 import java.util.List;
 import java.util.Optional;

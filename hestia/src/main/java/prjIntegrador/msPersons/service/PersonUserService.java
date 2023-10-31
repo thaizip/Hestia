@@ -1,7 +1,7 @@
-package prjIntegrador.hestia.service;
+package prjIntegrador.msPersons.service;
 
-import prjIntegrador.hestia.entity.Person;
-import prjIntegrador.hestia.payload.PersonDTO;
+import prjIntegrador.msPersons.entity.Person;
+import prjIntegrador.msPersons.payload.PersonDTO;
 
 import java.util.List;
 

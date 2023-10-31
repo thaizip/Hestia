@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.exeptions;
+package prjIntegrador.msPersons.exeptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.entity;
+package prjIntegrador.msPersons.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

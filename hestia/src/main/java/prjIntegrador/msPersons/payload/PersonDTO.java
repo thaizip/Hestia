@@ -1,4 +1,4 @@
-package prjIntegrador.hestia.payload;
+package prjIntegrador.msPersons.payload;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
