@@ -64,15 +64,14 @@ public class ProductServiceIMPL implements ProductsService{
 
     @Override
     public ProductDto createProduct(ProductDto productDto) {
-        var existingProduct = productRepository.findByName(productDto.getProductName());
-        if (existingProduct != null){
-            throw new ProductAPIException(HttpStatus.BAD_REQUEST,"This product name is already registered");
+
+        Product existingProduct = productRepository.findByProductName(productDto.getProductName());
+        if (existingProduct != null) {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "This product name is already registered");
         }
 
-        var categories = getCategoriesByIds(productDto.getCategories());
-
-        var newProduct = mapper.map(productDto, Product.class);
-        newProduct.setCategories(categories.stream().map(category -> (Category) category).collect(Collectors.toSet()));
+        Product newProduct = mapper.map(productDto, Product.class);
+        newProduct.setCategories(getCategoriesByIds(productDto.getCategories()));
 
         newProduct = productRepository.save(newProduct);
         return mapper.map(newProduct, ProductDto.class);

@@ -2,6 +2,7 @@ package hestia.msStore.payload;
 
 import hestia.msStore.model.Lista;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class CategoryDto {
 
-    @NotBlank
+    @NotNull(message = "The categoryName is null")
     private String categoryName;
 
-    @NotBlank
+    @NotNull(message = "The lists is null")
     private Set<Lista> lists;
 
 }

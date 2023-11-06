@@ -2,6 +2,7 @@ package hestia.msStore.payload;
 
 import hestia.msStore.model.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;
@@ -12,13 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ListaDto {
 
-    @NotBlank
+    @NotNull(message = "The listaname is null")
     private String listaname;
 
-    @NotBlank
+    @NotNull(message = "The data is null")
     private Date data;
 
-    @NotBlank
+    @NotNull(message = "The products is null")
     private List<Product> products;
 
 }

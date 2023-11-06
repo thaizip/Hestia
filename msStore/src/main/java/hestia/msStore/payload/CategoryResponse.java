@@ -9,9 +9,10 @@ import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
-public class ProductResponse {
+public class CategoryResponse {
 
-    private List<ProductDto> content;
+    private List<CategoryDto> categoryDtos;
+
     private int PageNo;
     private int pageSize;
     private long totalElements;

@@ -17,17 +17,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class ProductDto {
 
-    @NotBlank(message = "The product name should not be empty")
+    @NotNull(message = "The product name should not be empty")
     @Size(min = 3, message = "Product description should have at least 3 characters")
     private String productName;
 
-    @NotBlank(message = "The description should not be empty")
+    @NotNull(message = "The description should not be empty")
     @Size(min = 3, message = "Product description should have at least 3 characters")
     private String description;
 
-    @NotBlank(message = "The img product should not be empty")
+    @NotNull(message = "The img product should not be empty")
     private String imgUrl;
 
+    @NotNull
     @DecimalMin(value = "1",message = "The product price cant be less than 1")
     private BigDecimal price;
 
