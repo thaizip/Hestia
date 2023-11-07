@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDto {
 
@@ -19,4 +18,8 @@ public class CategoryDto {
     @NotNull(message = "The lists is null")
     private Set<Lista> lists;
 
+    public CategoryDto(String categoryName, Set<Lista> lists) {
+        this.categoryName = categoryName;
+        this.lists = lists;
+    }
 }

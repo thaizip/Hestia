@@ -1,9 +1,7 @@
 package hestia.msStore.payload;
 
 import hestia.msStore.model.Category;
-import hestia.msStore.model.Lista;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -13,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
 
@@ -35,4 +32,28 @@ public class ProductDto {
     @NotNull
     private Set<Category> categories;
 
+    public ProductDto(String productName, String description, String imgUrl, BigDecimal price, Set<Category> categories) {
+        this.productName = productName;
+        this.description = description;
+        this.imgUrl = imgUrl;
+        this.price = price;
+        this.categories = categories;
+    }
+
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 }

@@ -51,7 +51,7 @@ public class CategoryServiceIMPL implements CategoryService{
     }
 
     @Override
-    public List<CategoryDto> findAllCategories(CategoryDto categoryDto){
+    public List<CategoryDto> findAllCategories(){
         return categoryRepository.findAll()
                 .stream()
                 .map(category -> mapper.map(category,CategoryDto.class))

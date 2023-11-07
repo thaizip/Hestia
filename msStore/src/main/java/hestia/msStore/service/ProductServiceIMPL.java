@@ -70,10 +70,11 @@ public class ProductServiceIMPL implements ProductsService{
             throw new ProductAPIException(HttpStatus.BAD_REQUEST, "This product name is already registered");
         }
 
+        // Mapear e salvar o novo produto
         Product newProduct = mapper.map(productDto, Product.class);
         newProduct.setCategories(getCategoriesByIds(productDto.getCategories()));
-
         newProduct = productRepository.save(newProduct);
+
         return mapper.map(newProduct, ProductDto.class);
     }
 
@@ -96,16 +97,18 @@ public class ProductServiceIMPL implements ProductsService{
         productRepository.deleteById(productId);
     }
 
-    @Override
-    public Set<Category> getCategoriesByIds(Set<Category> categories) {
-        Set<Category> result = new HashSet<>();
 
-        for (Category category : categories) {
-            Category foundCategory = categoryRepository.findById(category.getCategoryId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Category", "id", category.getCategoryId()));
-            result.add(foundCategory);
+    @Override
+    public List<Category> getCategoriesByIds(List<Integer> categoryIds) {
+        List<Category> categories = new ArrayList<>();
+
+        for (Integer categoryId : categoryIds) {
+            Category category = categoryRepository.findById((int) categoryId.longValue())
+                    .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+            categories.add(category);
         }
-        return result;
+
+        return categories;
     }
 
 

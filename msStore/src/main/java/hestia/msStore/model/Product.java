@@ -1,12 +1,10 @@
 package hestia.msStore.model;
 
-import hestia.msStore.payload.CategoryDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @Getter @Setter @ToString
 @AllArgsConstructor
@@ -35,9 +33,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "lista_id"))
     private List<Lista> lists;
 
-    @OneToMany
-    @JoinColumn(name = "categories_Id")
-    private Set<Category> categories;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private List<Category> categories;
 
     public int getProductId() {
         return productId;
@@ -87,11 +85,11 @@ public class Product {
         this.lists = lists;
     }
 
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 }

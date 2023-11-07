@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter @Setter @ToString
 @AllArgsConstructor
@@ -16,6 +17,8 @@ public class Category {
 
     @Column(name = "category_name")
     private String categoryName;
+    @OneToMany(mappedBy = "categories")
+    private List<Product> products;
 
     public int getCategoryId() {
         return categoryId;
@@ -32,4 +35,13 @@ public class Category {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
 }

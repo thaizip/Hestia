@@ -13,6 +13,6 @@ public interface CategoryService {
 
     public CategoryDto createCategory(CategoryDto categoryDto);
 
-    public List<CategoryDto> findAllCategories(CategoryDto categoryDto);
+    public List<CategoryDto> findAllCategories();
 
 }

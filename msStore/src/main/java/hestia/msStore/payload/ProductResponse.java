@@ -18,4 +18,12 @@ public class ProductResponse {
     private int totalPages;
     private boolean last;
 
+    public ProductResponse(List<ProductDto> content, int pageNo, int pageSize, long totalElements, int totalPages, boolean last) {
+        this.content = content;
+        PageNo = pageNo;
+        this.pageSize = pageSize;
+        this.totalElements = totalElements;
+        this.totalPages = totalPages;
+        this.last = last;
+    }
 }
