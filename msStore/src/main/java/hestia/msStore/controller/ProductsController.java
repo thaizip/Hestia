@@ -27,8 +27,8 @@ public class ProductsController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto productDto){
-        return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto productDto, Integer categoryId){
+        return new ResponseEntity<>(serviceIMPL.createProduct(productDto, categoryId), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

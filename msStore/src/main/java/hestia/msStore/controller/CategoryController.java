@@ -34,7 +34,7 @@ public class CategoryController {
         this.mapper = mapper;
     }
 
-//    http://localhost:8082/category/list?page=0&size=10&orderBy=categoryId&direction=asc
+//  localhost:8082/category/list?page=0&size=10&orderBy=categoryId&direction=asc
     @GetMapping("/list")
     public ResponseEntity<Map<String, Object>> getAllCategory(
             @RequestParam(value = "page", defaultValue = "0" ,required = false) int page,

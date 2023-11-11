@@ -1,7 +1,6 @@
 package hestia.msStore.service;
 
 import hestia.msStore.exeptions.ProductAPIException;
-import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
 import hestia.msStore.model.Product;
 import hestia.msStore.payload.ProductDto;
@@ -22,9 +21,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceIMPL implements ProductsService{
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
-    private ModelMapper mapper;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final ModelMapper mapper;
 
     @Autowired
     public ProductServiceIMPL(ProductRepository productRepository, CategoryRepository categoryRepository, ModelMapper mapper) {
@@ -63,20 +62,18 @@ public class ProductServiceIMPL implements ProductsService{
     }
 
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
+    public ProductDto createProduct(ProductDto productDto, Integer categoryId) {
 
-        Product existingProduct = productRepository.findByProductName(productDto.getProductName());
-        if (existingProduct != null) {
-            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "This product name is already registered");
-        }
+        var categories = getCategoryById(productDto.getCategories());
 
-        // Mapear e salvar o novo produto
-        Product newProduct = mapper.map(productDto, Product.class);
-        newProduct.setCategories(getCategoriesByIds(productDto.getCategories()));
+        var newProduct = mapper.map(productDto, Product.class);
+        newProduct.setCategory(categories.stream().map(category -> (Category) category).collect(Collectors.toSet()));
+
         newProduct = productRepository.save(newProduct);
-
         return mapper.map(newProduct, ProductDto.class);
+
     }
+
 
     @Override
     public ProductDto updateProduct(int productId, ProductDto productDto) {
@@ -88,7 +85,7 @@ public class ProductServiceIMPL implements ProductsService{
             productRepository.save(product);
             return mapper.map(product, ProductDto.class);
         } else {
-            throw new RuntimeException("Product not found");
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not found");
         }
     }
 
@@ -99,17 +96,14 @@ public class ProductServiceIMPL implements ProductsService{
 
 
     @Override
-    public List<Category> getCategoriesByIds(List<Integer> categoryIds) {
-        List<Category> categories = new ArrayList<>();
-
-        for (Integer categoryId : categoryIds) {
-            Category category = categoryRepository.findById((int) categoryId.longValue())
-                    .orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
-            categories.add(category);
+    public Set<Category> getCategoryById(Set<Category> categories) {
+        if (categories != null) {
+            return categories.stream()
+                    .filter(category -> category.getCategoryId() == category.getCategoryId())
+                    .collect(Collectors.toSet());
+        } else {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Category is Null");
         }
-
-        return categories;
     }
-
 
 }

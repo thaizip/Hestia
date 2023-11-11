@@ -45,7 +45,5 @@ Y
 )src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284
 o
 ?src/main/java/hestia/msStore/controller/CategoryController.java,c\9\c9d7771d4e3583b7676fd190f7a6fa1fceef9a2d
-j
-:src/main/java/hestia/msStore/payload/CategoryResponse.java,0\8\089ffa16c64c46ce416d3785c81ca89ba87dde4e
-m
-=src/main/java/hestia/msStore/service/CategoryServiceIMPL.java,0\6\0622c4730fbb7e898dc665cf889b125e4b5a1ead
+l
+<src/main/java/hestia/msStore/payload/ClassProductMapper.java,f\5\f5267c7bb094463dd2c8b1ee9b6838641e970607

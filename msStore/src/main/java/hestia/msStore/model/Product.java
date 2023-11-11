@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Getter @Setter @ToString
 @AllArgsConstructor
@@ -35,7 +37,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    private List<Category> categories;
+    private Category category;
 
     public int getProductId() {
         return productId;
@@ -85,11 +87,11 @@ public class Product {
         this.lists = lists;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategory(Optional<Category> category) {
+        return this.category;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategory(Set<Category> productDto) {
+        this.category = category;
     }
 }

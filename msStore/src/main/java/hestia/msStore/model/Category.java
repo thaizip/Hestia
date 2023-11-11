@@ -3,7 +3,6 @@ package hestia.msStore.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Getter @Setter @ToString
@@ -17,8 +16,6 @@ public class Category {
 
     @Column(name = "category_name")
     private String categoryName;
-    @OneToMany(mappedBy = "categories")
-    private List<Product> products;
 
     public int getCategoryId() {
         return categoryId;
@@ -36,12 +33,8 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public int contains(int categoryId) {
+        return categoryId;
     }
 
 }

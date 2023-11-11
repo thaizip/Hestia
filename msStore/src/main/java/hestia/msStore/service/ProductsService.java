@@ -4,7 +4,7 @@ import hestia.msStore.model.Category;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.payload.ProductResponse;
 
-import java.util.List;
+import java.util.Set;
 
 
 public interface ProductsService {
@@ -14,11 +14,11 @@ public interface ProductsService {
 
     public ProductDto getProductById(int productId);
 
-    public ProductDto createProduct(ProductDto productDto);
+    public ProductDto createProduct(ProductDto productDto, Integer categoryId);
 
     public ProductDto updateProduct(int productId, ProductDto productDto);
 
     public void deleteProductById(int productId);
 
-    public List<Category> getCategoriesByIds(List<Integer> categoryIds);
+    public Set<Category> getCategoryById(Set<Category> categories);
 }
