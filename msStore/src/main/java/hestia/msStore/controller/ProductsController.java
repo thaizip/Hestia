@@ -34,22 +34,30 @@ public class ProductsController {
         return new ResponseEntity<>(serviceIMPL.createProduct(productDto), HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{productName}")
-    public ResponseEntity<ProductDto> getProductByName(@PathVariable(value = "productName") String productName) {
-        return new ResponseEntity<>(serviceIMPL.getProductByName(productName), HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> findProductByName(ProductDto productDto){
+        return new ResponseEntity<>(serviceIMPL.findProductByName(productDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProductById(@PathVariable(value = "id") int productId){
+    //    localhost:8082/products/pera
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> findAllProducts() {
+        return new ResponseEntity<>(serviceIMPL.findAllProducts(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<String> deleteProductById(@PathVariable(value = "productId") int productId){
         serviceIMPL.deleteProductById(productId);
         return new ResponseEntity<>("Product deleted Successfully",HttpStatus.OK);
     }
 
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ProductDto> updateProduct(@PathVariable(value = "id") int productId, @RequestBody @Valid ProductDto productDto){
-//        return new ResponseEntity<>(serviceIMPL.updateProduct(productId,productDto),HttpStatus.OK);
-//    }
+//    localhost:8082/products/10
+    @PutMapping("/{productId}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable(value = "productId") int productId, @RequestBody @Valid ProductDto productDto){
+        return new ResponseEntity<>(serviceIMPL.updateProduct(productId,productDto),HttpStatus.OK);
+    }
 
 
 

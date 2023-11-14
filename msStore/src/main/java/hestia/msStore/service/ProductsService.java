@@ -14,7 +14,9 @@ public interface ProductsService {
 
 //    public ProductResponse getAllProducts(int pageNo, int pageSize, String orderBy, String direction);
 //
-    public ProductDto getProductByName(String productName);
+    public List<ProductDto> findAllProducts();
+
+    public ProductDto findProductByName(ProductDto productDto);
 
     public ProductDto createProduct(ProductDto productDto);
 

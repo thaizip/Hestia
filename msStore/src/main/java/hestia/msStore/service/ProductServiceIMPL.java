@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceIMPL implements ProductsService {
@@ -44,49 +45,24 @@ public class ProductServiceIMPL implements ProductsService {
 //    }
 
     @Override
-    public ProductDto getProductByName(String productName) {
+    public List<ProductDto> findAllProducts(){
+        return productRepository.findAll()
+                .stream()
+                .map(product -> ClassProductMapper.INTANCE.productToDto(product))
+                .collect(Collectors.toList());
+    }
 
-        if (productName != null && !productName.isEmpty()) {
-            Product product = productRepository.findByProductName(productName);
+    @Override
+    public ProductDto findProductByName(ProductDto productDto) {
+        var product = ClassProductMapper.INTANCE.dtoToProduct(productDto);
+        productRepository.findByProductName(product.getProductName());
 
-            if (product != null) {
-                // Map the Product entity to a ProductDto using your mapper
-                return ClassProductMapper.INTANCE.productToDto(product);
-            } else {
-                throw new ProductAPIException(HttpStatus.NOT_FOUND, "Product Not Found");
-            }
-        } else {
-            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product Name is Null or Empty");
+        if (product != null){
+            return ClassProductMapper.INTANCE.productToDto(product);
+        }else {
+            throw new ProductAPIException(HttpStatus.NOT_FOUND, "Product not Found");
         }
 
-
-        // For illustration purposes, let's assume there's a method like getProductByName in your service
-
-
-        //        if (product != null) {
-//            Product existingProduct = productRepository.findByProductName(product.getProductName());
-//            if (existingProduct.isPresent()) {
-//                return existingProduct.get();
-//            } else {
-//                // If the product does not exist, you might want to throw an exception or handle it accordingly
-//                throw new ProductAPIException(HttpStatus.NOT_FOUND, "Product not found");
-//            }
-//        } else {
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product is Null");
-//        }
-
-
-//        var existingProduct = productRepository.findByProductName(productName);
-//        if (existingProduct != null){
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST,"This product name is already registered");
-//        }
-//
-//        if (existingProduct.isPresent) {
-//            Product product = existingProduct.get();
-//            return ClassProductMapper.INTANCE.productToDto(product);
-//        } else {
-//            throw new EntityNotFoundException("Person with ID " + productId + " not found");
-//        }
     }
 
     @Override
@@ -99,22 +75,30 @@ public class ProductServiceIMPL implements ProductsService {
     }
 
 
-//    public ProductDto updateProduct(int productId, ProductDto productDto) {
-//        Optional<Product> productOptional = productRepository.findById(productId);
-//
-//        if (productOptional.isPresent()) {
-//            Product product = productOptional.get();
-//            mapper.map(productDto, product);
-//            productRepository.save(product);
-//            return mapper.map(product, ProductDto.class);
-//        } else {
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not found");
-//        }
-//    }
+    public ProductDto updateProduct(int productId, ProductDto productDto) {
+        var search = productRepository.findById(productId);
+
+        if (search.isPresent()) {
+            var product = ClassProductMapper.INTANCE.dtoToProduct(productDto);
+            var categories = getCategoryById(productDto.getCategories());
+            product.setCategory(categories);
+            productRepository.save(product);
+            return ClassProductMapper.INTANCE.productToDto(product);
+        } else {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not found");
+        }
+    }
 
 
     public void deleteProductById(int productId) {
-        productRepository.deleteById(productId);
+        var search = productRepository.findById(productId);
+
+        if (search.isPresent()){
+            productRepository.deleteById(productId);
+        }else {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not Exist");
+        }
+
     }
 
 
