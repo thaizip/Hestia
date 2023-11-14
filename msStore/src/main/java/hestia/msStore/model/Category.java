@@ -1,5 +1,6 @@
 package hestia.msStore.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +16,7 @@ public class Category {
     private int categoryId;
 
     @Column(name = "category_name")
+    @JsonProperty("categoryName")
     private String categoryName;
 
     public int getCategoryId() {

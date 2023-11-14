@@ -1,8 +1,6 @@
 
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-\
-,src/main/java/hestia/msStore/config/Map.java,c\e\ced7a6fa7d280ac70a0e9fc7fdbf47ddbf34c189
 o
 ?src/main/java/hestia/msStore/repository/CategoryRepository.java,6\3\6376a51e57726daebd0dd14856add9680846026b
 l
@@ -47,3 +45,11 @@ o
 ?src/main/java/hestia/msStore/controller/CategoryController.java,c\9\c9d7771d4e3583b7676fd190f7a6fa1fceef9a2d
 l
 <src/main/java/hestia/msStore/payload/ClassProductMapper.java,f\5\f5267c7bb094463dd2c8b1ee9b6838641e970607
+m
+=src/main/java/hestia/msStore/service/CategoryServiceIMPL.java,0\6\0622c4730fbb7e898dc665cf889b125e4b5a1ead
+b
+2src/main/java/hestia/msStore/config/AppConfig.java,9\f\9f02f5f1b39495fac47b4451be84f3a55c833dbb
+o
+?src/main/java/hestia/msStore/config/ClassProductMapperIMPL.java,1\c\1cba1ee9714b350292435ced8ce63878c528bc74
+k
+;src/main/java/hestia/msStore/config/ClassProductMapper.java,c\c\cc8db77ec8f68662f2c4d68f48ce56b846a67c82

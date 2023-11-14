@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Getter @Setter @ToString
@@ -35,8 +34,8 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "lista_id"))
     private List<Lista> lists;
 
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public int getProductId() {
@@ -87,11 +86,11 @@ public class Product {
         this.lists = lists;
     }
 
-    public Category getCategory(Optional<Category> category) {
-        return this.category;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory(Set<Category> productDto) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

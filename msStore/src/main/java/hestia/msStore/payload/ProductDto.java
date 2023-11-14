@@ -36,10 +36,10 @@ public class ProductDto {
     private BigDecimal price;
 
     @NotNull
-    @JsonProperty("category")
-    private Set<Category> categories;
+    @JsonProperty("categories")
+    private Category categories;
 
-    public ProductDto(String productName, String description, String imgUrl, BigDecimal price, Set<Category> categories) {
+    public ProductDto(String productName, String description, String imgUrl, BigDecimal price, Category categories) {
         this.productName = productName;
         this.description = description;
         this.imgUrl = imgUrl;
@@ -55,12 +55,11 @@ public class ProductDto {
         this.productName = productName;
     }
 
-    public Set<Category> getCategories() {
+    public Category getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(Category categories) {
         this.categories = categories;
     }
-
 }
