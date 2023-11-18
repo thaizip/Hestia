@@ -1,13 +1,14 @@
 package hestia.msStore.service;
 
+import hestia.msStore.config.ClassMapper;
 import hestia.msStore.exeptions.ProductAPIException;
+import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
-import hestia.msStore.config.ClassProductMapper;
+import hestia.msStore.config.ClassMapper;
 import hestia.msStore.model.Product;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,77 +20,62 @@ import java.util.stream.Collectors;
 public class ProductServiceIMPL implements ProductsService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    private final ClassProductMapper mapper;
+    private final ClassMapper mapper;
 
     @Autowired
-    public ProductServiceIMPL(ProductRepository productRepository, CategoryRepository categoryRepository, ClassProductMapper mapper) {
+    public ProductServiceIMPL(ProductRepository productRepository, CategoryRepository categoryRepository, ClassMapper mapper) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.mapper = mapper;
     }
 
-//    public ProductResponse getAllProducts(int pageNo, int pageSize, String orderBy, String direction) {
-//
-//        var pageable = PageRequest.of(pageNo,pageSize,
-//                Sort.by(Sort.Direction.fromString(direction.toLowerCase()),
-//                        orderBy));
-//
-//        Page<Product> productPage = productRepository.findAll(pageable);
-//
-//        List<ProductDto> content = productPage
-//                .stream().map(product -> mapper.map(product,ProductDto.class))
-//                .collect(Collectors.toList());
-//
-//        return new ProductResponse(content,productPage.getNumber(),productPage.getSize(),
-//                productPage.getTotalElements(),productPage.getTotalPages(),productPage.isLast());
-//    }
-
     @Override
     public List<ProductDto> findAllProducts(){
         return productRepository.findAll()
                 .stream()
-                .map(product -> ClassProductMapper.INTANCE.productToDto(product))
+                .map(product -> ClassMapper.INTANCE.productToDto(product))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ProductDto findProductByName(ProductDto productDto) {
-        var product = ClassProductMapper.INTANCE.dtoToProduct(productDto);
-        productRepository.findByProductName(product.getProductName());
+    public List<ProductDto> findAllProductByName(String productName) {
+        List<Product> products = productRepository.findAllByProductName(productName);
 
-        if (product != null){
-            return ClassProductMapper.INTANCE.productToDto(product);
-        }else {
-            throw new ProductAPIException(HttpStatus.NOT_FOUND, "Product not Found");
+        if (products.isEmpty()) {
+            throw new ResourceNotFoundException("No products found with name: " + productName);
         }
 
+        return products.stream()
+                .map(ClassMapper.INTANCE::productToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public ProductDto createProduct(ProductDto productDto) {
-        var product = ClassProductMapper.INTANCE.dtoToProduct(productDto);
+        var product = ClassMapper.INTANCE.dtoToProduct(productDto);
         var categories = getCategoryById(productDto.getCategories());
         product.setCategory(categories);
         productRepository.save(product);
-        return ClassProductMapper.INTANCE.productToDto(product);
+        return ClassMapper.INTANCE.productToDto(product);
     }
 
 
+    @Override
     public ProductDto updateProduct(int productId, ProductDto productDto) {
         var search = productRepository.findById(productId);
 
         if (search.isPresent()) {
-            var product = ClassProductMapper.INTANCE.dtoToProduct(productDto);
+            var product = ClassMapper.INTANCE.dtoToProduct(productDto);
             var categories = getCategoryById(productDto.getCategories());
             product.setCategory(categories);
             productRepository.save(product);
-            return ClassProductMapper.INTANCE.productToDto(product);
+            return ClassMapper.INTANCE.productToDto(product);
         } else {
             throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Product not found");
         }
     }
 
-
+    @Override
     public void deleteProductById(int productId) {
         var search = productRepository.findById(productId);
 

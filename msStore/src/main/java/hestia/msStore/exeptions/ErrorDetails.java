@@ -1,6 +1,5 @@
 package hestia.msStore.exeptions;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Date;

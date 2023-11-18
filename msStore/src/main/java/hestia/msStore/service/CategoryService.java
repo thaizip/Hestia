@@ -1,18 +1,16 @@
 package hestia.msStore.service;
 
-import hestia.msStore.payload.CategoryDto;
-import hestia.msStore.payload.CategoryResponse;
-import hestia.msStore.payload.ProductResponse;
+import hestia.msStore.model.Category;
+import hestia.msStore.model.Product;
+import hestia.msStore.payload.ProductDto;
 
 import java.util.List;
 
 public interface CategoryService {
 
-//
-//    public CategoryResponse getAllCategory(int pageNo, int pageSize, String orderBy, String direction);
-//
-//    public CategoryDto createCategory(CategoryDto categoryDto);
-//
-//    public List<CategoryDto> findAllCategories();
+    public List<ProductDto> findAllCategoryByName(String categoryName);
+
+    public List<Product> getProductyById(Category category);
+
 
 }

@@ -1,7 +1,6 @@
 package hestia.msStore.payload;
 
 import hestia.msStore.model.Product;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 

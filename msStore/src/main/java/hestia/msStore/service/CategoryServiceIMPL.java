@@ -1,62 +1,70 @@
 package hestia.msStore.service;
 
+import hestia.msStore.config.ClassMapper;
+import hestia.msStore.exeptions.ProductAPIException;
+import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
-import hestia.msStore.payload.CategoryDto;
-import hestia.msStore.payload.CategoryResponse;
+import hestia.msStore.model.Product;
+import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
-//import org.modelmapper.ModelMapper;
+import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceIMPL implements CategoryService{
 
-//    private CategoryRepository categoryRepository;
-//
-//    private ModelMapper mapper;
-//
-//    @Autowired
-//    public CategoryServiceIMPL(CategoryRepository categoryRepository, ModelMapper mapper) {
-//        this.categoryRepository = categoryRepository;
-//        this.mapper = mapper;
-//    }
-//
-//    @Override
-//    public CategoryResponse getAllCategory(int pageNo, int pageSize, String orderBy, String direction) {
-//        var pageable = PageRequest.of(pageNo,pageSize,
-//                Sort.by(Sort.Direction.fromString(direction.toLowerCase()),
-//                        orderBy));
-//
-//        Page<Category> categoryPage = categoryRepository.findAll(pageable);
-//
-//        List<CategoryDto> content = categoryPage
-//                .stream().map(category -> mapper.map(category,CategoryDto.class))
-//                .collect(Collectors.toList());
-//
-//        return new CategoryResponse(content,categoryPage.getNumber(),categoryPage.getSize(),
-//                categoryPage.getTotalElements(),categoryPage.getTotalPages(),categoryPage.isLast());
-//    }
-//
-//    @Override
-//    public CategoryDto createCategory(CategoryDto categoryDto){
-//        var category = mapper.map(categoryDto, Category.class);
-//        var newCategory = categoryRepository.save(category);
-//        return mapper.map(newCategory,CategoryDto.class);
-//    }
-//
-//    @Override
-//    public List<CategoryDto> findAllCategories(){
-//        return categoryRepository.findAll()
-//                .stream()
-//                .map(category -> mapper.map(category,CategoryDto.class))
-//                .collect(Collectors.toList());
-//    }
+    private final CategoryRepository categoryRepository;
+
+    private final ProductRepository productRepository;
+
+    @Autowired
+    public CategoryServiceIMPL(CategoryRepository categoryRepository, ProductRepository productRepository) {
+        this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
+    }
+
+    @Override
+    public List<ProductDto> findAllCategoryByName(String categoryName) {
+        List<Category> categoryList = categoryRepository.findAllByCategoryName(categoryName);
+
+        if (categoryList.isEmpty()) {
+            throw new ResourceNotFoundException("No categories found with name: " + categoryName);
+        }
+
+        List<ProductDto> productDtoList = new ArrayList<>();
+
+        for (Category category : categoryList) {
+            List<Product> productList = getProductyById(category);
+            List<ProductDto> categoryProductDtos = productList.stream()
+                    .map(ClassMapper.INTANCE::productToDto)
+                    .collect(Collectors.toList());
+
+            productDtoList.addAll(categoryProductDtos);
+        }
+
+        return productDtoList;
+    }
+
+
+    @Override
+    public List<Product> getProductyById(Category category) {
+        if (category != null) {
+            List<Product> existingProducts = productRepository.findAllByCategory(category);
+            if (!existingProducts.isEmpty()) {
+                return existingProducts;
+            } else {
+                throw new ProductAPIException(HttpStatus.BAD_REQUEST, "No products found for the specified category");
+            }
+        } else {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Category is Null");
+        }
+    }
 
 
 }
