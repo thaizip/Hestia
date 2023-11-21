@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-@Getter @Setter @ToString
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity @Table(name = "Lista")
@@ -26,6 +26,30 @@ public class Lista {
     @Column(nullable = false)
     @JsonIgnore
     private List<Product> products;
+
+    public int getListaId() {
+        return listaId;
+    }
+
+    public void setListaId(int listaId) {
+        this.listaId = listaId;
+    }
+
+    public String getListaname() {
+        return listaname;
+    }
+
+    public void setListaname(String listaname) {
+        this.listaname = listaname;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 
     public List<Product> getProducts() {
         return products;

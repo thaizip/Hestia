@@ -53,3 +53,5 @@ j
 :src/main/java/hestia/msStore/service/ListaServiceIMPL.java,c\b\cb2f5d46ceec07cf3a04fcefa931b2b3122177ca
 l
 <src/main/java/hestia/msStore/controller/ListaController.java,c\6\c6dd5ba9410d9c12a5403db0679934a53fbb23b8
+
+Otarget/generated-sources/annotations/hestia/msStore/config/ClassMapperImpl.java,8\3\830d922c71e24fe79b4a5c16234f1da5425eacce

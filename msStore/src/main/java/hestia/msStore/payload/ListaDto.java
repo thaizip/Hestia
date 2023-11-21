@@ -8,12 +8,12 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-@Getter @Setter @ToString
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListaDto {
 
-    @NotNull(message = "The listaname is null")
+    @NotNull(message = "The name is null")
     @JsonProperty("name")
     private String listaname;
 
@@ -23,13 +23,30 @@ public class ListaDto {
 
 //    @NotNull(message = "The products is null")
     @JsonProperty("products")
-    private List<Product> products;
+    private List<ProductDto> products;
 
-    public List<Product> getProducts() {
+    public List<ProductDto> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public String getListaname() {
+        return listaname;
+    }
+
+    public void setListaname(String listaname) {
+        this.listaname = listaname;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void setProducts(List<ProductDto> products) {
         this.products = products;
     }
+
 }

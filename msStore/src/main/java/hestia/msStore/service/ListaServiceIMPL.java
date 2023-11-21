@@ -1,15 +1,19 @@
 package hestia.msStore.service;
 
 import hestia.msStore.config.ClassMapper;
+import hestia.msStore.exeptions.ProductAPIException;
+import hestia.msStore.model.Product;
 import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.repository.ListaRepository;
 import hestia.msStore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ListaServiceIMPL implements ListaService{
@@ -39,13 +43,8 @@ public class ListaServiceIMPL implements ListaService{
     @Override
     public ListaDto createLista(ListaDto listaDto) {
         var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-
-        List<ProductDto> productDtos = listaDto.getProducts();
-        if (productDtos != null) {
-            // Assuming that the setProducts method expects a List<Product>
-            lista.setProducts(ClassMapper.INTANCE.dtoProductListToEntityList(productDtos));
-        }
-
+        var products = getProductById(listaDto.getProducts());
+        lista.setProducts(products);
         listaRepository.save(lista);
         return ClassMapper.INTANCE.listaToDto(lista);
     }
@@ -61,19 +60,15 @@ public class ListaServiceIMPL implements ListaService{
     }
 
 
-//    public List<Product> getProductsByName(Product product){
-//        if (product != null) {
-//            List<Product> existingProducts = productRepository.f
-//            if (!existingProducts.isEmpty()) {
-//                return existingProducts;
-//            } else {
-//                throw new ProductAPIException(HttpStatus.BAD_REQUEST, "No products found for the specified category");
-//            }
-//        } else {
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Category is Null");
-//        }
-//
-//    }
+    public List<Product> getProductById(List<ProductDto> productDtos) {
+        var existingProducts = productRepository.findAllById(productIds);
+
+        if (!existingProducts.isEmpty()) {
+            return existingProducts;
+        } else {
+            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "No products found for the specified IDs");
+        }
+    }
 
 
 
