@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceIMPL implements CategoryService{
@@ -43,7 +42,7 @@ public class CategoryServiceIMPL implements CategoryService{
             List<Product> productList = getProductyById(category);
             List<ProductDto> categoryProductDtos = productList.stream()
                     .map(ClassMapper.INTANCE::productToDto)
-                    .collect(Collectors.toList());
+                    .toList();
 
             productDtoList.addAll(categoryProductDtos);
         }

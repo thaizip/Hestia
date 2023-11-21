@@ -1,15 +1,20 @@
 package hestia.msStore.config;
 
+import hestia.msStore.model.Lista;
 import hestia.msStore.model.Product;
+import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ProductDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ClassMapper {
 
-    public static final ClassMapper INTANCE = Mappers.getMapper(ClassMapper.class);
+
+    ClassMapper INTANCE = Mappers.getMapper(ClassMapper.class);
 
     @Mapping(source = "productName", target = "productName")
     @Mapping(source = "description", target = "description")
@@ -24,5 +29,13 @@ public interface ClassMapper {
     @Mapping(source = "price", target = "price")
     @Mapping(source = "categories", target = "category")
     Product dtoToProduct(ProductDto productDto);
+
+    List<ProductDto> productListToDtoList(List<Product> products);
+
+    List<Product> dtoProductListToEntityList(List<ProductDto> productDtos);
+
+    ListaDto listaToDto(Lista lista);
+
+    Lista dtoToLista(ListaDto listaDto);
 
 }

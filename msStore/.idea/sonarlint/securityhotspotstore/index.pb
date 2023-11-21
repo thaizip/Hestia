@@ -47,5 +47,9 @@ m
 =src/main/java/hestia/msStore/service/CategoryServiceIMPL.java,0\6\0622c4730fbb7e898dc665cf889b125e4b5a1ead
 d
 4src/main/java/hestia/msStore/config/ClassMapper.java,0\f\0f3954a5f7365f3e194fb438ea38731d0c53daf5
+f
+6src/main/java/hestia/msStore/service/ListaService.java,f\a\fad6be147af3d544c77e43832c50fb3bf317bc0b
 j
-:src/main/java/hestia/msStore/payload/CategoryResponse.java,0\8\089ffa16c64c46ce416d3785c81ca89ba87dde4e
+:src/main/java/hestia/msStore/service/ListaServiceIMPL.java,c\b\cb2f5d46ceec07cf3a04fcefa931b2b3122177ca
+l
+<src/main/java/hestia/msStore/controller/ListaController.java,c\6\c6dd5ba9410d9c12a5403db0679934a53fbb23b8

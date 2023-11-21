@@ -1,6 +1,5 @@
 package hestia.msStore.controller;
 
-import hestia.msStore.config.ClassMapper;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
 import hestia.msStore.service.CategoryServiceIMPL;
@@ -15,13 +14,10 @@ public class CategoryController {
     private CategoryServiceIMPL serviceIMPL;
     private CategoryRepository categoryRepository;
 
-    private ClassMapper classMapper;
-
     @Autowired
-    public CategoryController(CategoryServiceIMPL serviceIMPL, CategoryRepository categoryRepository, ClassMapper classMapper) {
+    public CategoryController(CategoryServiceIMPL serviceIMPL, CategoryRepository categoryRepository) {
         this.serviceIMPL = serviceIMPL;
         this.categoryRepository = categoryRepository;
-        this.classMapper = classMapper;
     }
 
     @GetMapping("/{categoryName}")

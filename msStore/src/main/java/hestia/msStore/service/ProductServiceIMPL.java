@@ -4,7 +4,6 @@ import hestia.msStore.config.ClassMapper;
 import hestia.msStore.exeptions.ProductAPIException;
 import hestia.msStore.exeptions.ResourceNotFoundException;
 import hestia.msStore.model.Category;
-import hestia.msStore.config.ClassMapper;
 import hestia.msStore.model.Product;
 import hestia.msStore.payload.ProductDto;
 import hestia.msStore.repository.CategoryRepository;
