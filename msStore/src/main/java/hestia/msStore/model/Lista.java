@@ -4,6 +4,10 @@ package hestia.msStore.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +24,7 @@ public class Lista {
     private String listaname;
 
     @Column(name = "data")
-    private Date data;
+    private LocalDate data;
 
     @ManyToMany(mappedBy = "lists")
     @Column(nullable = false)
@@ -43,11 +47,11 @@ public class Lista {
         this.listaname = listaname;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

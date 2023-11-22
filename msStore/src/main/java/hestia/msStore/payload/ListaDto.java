@@ -1,10 +1,14 @@
 package hestia.msStore.payload;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hestia.msStore.model.Product;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +21,10 @@ public class ListaDto {
     @JsonProperty("name")
     private String listaname;
 
-    @NotNull(message = "The data is null")
+    @NotNull(message = "The name is null")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("data")
-    private Date data;
+    private LocalDate data;
 
 //    @NotNull(message = "The products is null")
     @JsonProperty("products")
@@ -37,11 +42,11 @@ public class ListaDto {
         this.listaname = listaname;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ClassMapper {
 
+
     ClassMapper INTANCE = Mappers.getMapper(ClassMapper.class);
 
     @Mapping(source = "productName", target = "productName")
@@ -36,6 +37,5 @@ public interface ClassMapper {
     ListaDto listaToDto(Lista lista);
 
     Lista dtoToLista(ListaDto listaDto);
-
 
 }
