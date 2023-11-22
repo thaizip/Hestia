@@ -36,7 +36,6 @@ public class ListaServiceIMPL implements ListaService{
     @Override
     public ListaDto createLista(ListaDto listaDto) {
         var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-//        var products = listaDto.getProducts(lista.setProducts());
         listaRepository.save(lista);
         return ClassMapper.INTANCE.listaToDto(lista);
     }
@@ -50,21 +49,5 @@ public class ListaServiceIMPL implements ListaService{
     public void deleteListaById(int listaId) {
 
     }
-
-
-//    @Override
-//    public List<ProductDto> getProductById(ProductDto productDto) {
-//        var product = ClassMapper.INTANCE.dtoToProduct(productDto);
-//        var existingProducts = productRepository.findById(product.getProductId());
-//
-//        if (!existingProducts.isEmpty()) {
-//            existingProducts = ClassMapper.INTANCE.dtoProductListToEntityList()
-//            return existingProducts;
-//        } else {
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "No products found for the specified IDs");
-//        }
-//    }
-
-
-
+    
 }

@@ -21,5 +21,5 @@ public class ListaController {
     public ResponseEntity<ListaDto> createLista(@RequestBody ListaDto listaDto){
         return new ResponseEntity<>(serviceIMPL.createLista(listaDto), HttpStatus.CREATED);
     }
-    
+
 }
