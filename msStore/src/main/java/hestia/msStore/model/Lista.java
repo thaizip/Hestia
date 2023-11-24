@@ -21,7 +21,7 @@ public class Lista {
     private int listaId;
 
     @Column(name = "name")
-    private String listaname;
+    private String listaName;
 
     @Column(name = "data")
     private LocalDate data;
@@ -39,12 +39,12 @@ public class Lista {
         this.listaId = listaId;
     }
 
-    public String getListaname() {
-        return listaname;
+    public String getListaName() {
+        return listaName;
     }
 
-    public void setListaname(String listaname) {
-        this.listaname = listaname;
+    public void setListaName(String listaName) {
+        this.listaName = listaName;
     }
 
     public LocalDate getData() {

@@ -19,7 +19,7 @@ public class ListaDto {
 
     @NotNull(message = "The name is null")
     @JsonProperty("name")
-    private String listaname;
+    private String listaName;
 
     @NotNull(message = "The name is null")
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -34,12 +34,12 @@ public class ListaDto {
         return products;
     }
 
-    public String getListaname() {
-        return listaname;
+    public String getListaName() {
+        return listaName;
     }
 
-    public void setListaname(String listaname) {
-        this.listaname = listaname;
+    public void setListaName(String listaName) {
+        this.listaName = listaName;
     }
 
     public LocalDate getData() {
