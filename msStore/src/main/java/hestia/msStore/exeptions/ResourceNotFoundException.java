@@ -1,5 +1,6 @@
 package hestia.msStore.exeptions;
 
+import hestia.msStore.model.Product;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,4 +23,11 @@ public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String resourceName) {
         super(resourceName);
     }
+
+//    public ResourceNotFoundException(String product, String name, String productName) {
+//        super(String.format("%s not found with %s : '%s'",product,name,productName));
+//        this.product = product;
+//        this.name = name;
+//        this.productName = productName;
+//    }
 }

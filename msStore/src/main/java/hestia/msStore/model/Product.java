@@ -1,5 +1,7 @@
 package hestia.msStore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +18,7 @@ public class Product {
     private int productId;
 
     @Column(name = "productName")
+    @JsonProperty("name")
     private String productName;
 
     @Column(name = "description")
@@ -27,10 +30,9 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany
-    @JoinTable(name = "product_lista",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId" ),
-            inverseJoinColumns = @JoinColumn(name = "lista_id"))
+    @ManyToMany(mappedBy = "products")
+    @Column(nullable = false)
+    @JsonIgnore
     private List<Lista> lists;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

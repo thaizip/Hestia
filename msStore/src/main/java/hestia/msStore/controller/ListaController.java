@@ -37,4 +37,10 @@ public class ListaController {
         return new ResponseEntity<>(serviceIMPL.updateLista(listaId, listaDto), HttpStatus.OK);
     }
 
+    @PutMapping("/add/{listaId}/{productId}")
+    public ResponseEntity<ListaDto> addProductsInLista(@PathVariable int listaId, @PathVariable int productId){
+        var listaDto = serviceIMPL.addProductsInLista(listaId, productId);
+        return new ResponseEntity<>(listaDto, HttpStatus.OK);
+    }
+
 }

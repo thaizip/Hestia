@@ -4,7 +4,8 @@ import hestia.msStore.model.Lista;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ListaRepository extends JpaRepository<Lista, Integer> {
-    List<Lista> findAllByListaName(String listaName);
+    Optional<Lista> findAllByListaName(String listaName);
 }

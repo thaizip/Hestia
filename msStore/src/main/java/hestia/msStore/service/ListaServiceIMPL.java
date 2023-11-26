@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,7 +49,7 @@ public class ListaServiceIMPL implements ListaService{
 
     @Override
     public List<ListaDto> findAllListaByName(String listaName) {
-        List<Lista> lista = listaRepository.findAllByListaName(listaName);
+        Optional<Lista> lista = listaRepository.findAllByListaName(listaName);
 
         if (lista.isEmpty()) {
             throw new ResourceNotFoundException("No Lista found with name: " + listaName);
@@ -61,7 +63,15 @@ public class ListaServiceIMPL implements ListaService{
     @Override
     public ListaDto createLista(ListaDto listaDto) {
         var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
+
+        // Save each product before saving the Lista
+        for (Product product : lista.getProducts()) {
+            productRepository.save(product);
+        }
+
+        // Now save the Lista object
         listaRepository.save(lista);
+
         return ClassMapper.INTANCE.listaToDto(lista);
     }
 
@@ -79,42 +89,23 @@ public class ListaServiceIMPL implements ListaService{
     }
 
     @Override
-    public ListaDto addProductsInLista(int listaId, ListaDto listaDto) {
-//        var search = listaRepository.findById(listaId);
-//
-//        if (search.isPresent()) {
-//            var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-//            var product = getProductById(listaDto.getProducts());
-//            product.setCategory(categories);
-//            productRepository.save(product);
-//            return ClassMapper.INTANCE.listaToDto(lista);
-//        } else {
-//            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Lista not found");
-//        }
-//        
-        return null;
+    public ListaDto addProductsInLista(int listaId, int productId) {
+        var existingList = listaRepository.findById(listaId).orElseThrow(
+                () -> new ResourceNotFoundException("Lista", "id", listaId));
+
+        var searchProduct = productRepository.findById(productId).orElseThrow(
+                () -> new ResourceNotFoundException("Product", "id", productId));
+
+        existingList.getProducts().add(searchProduct);
+        listaRepository.save(existingList);
+        return ClassMapper.INTANCE.listaToDto(existingList);
+
     }
+
 
     @Override
     public void deleteListaById(int listaId) {
 
-    }
-
-    @Override
-    public ProductDto getProductById(ProductDto productDto) {
-        var product = ClassMapper.INTANCE.dtoToProduct(productDto);
-
-        if (product != null) {
-            var existingProducts = productRepository.findById(product.getProductId());
-            if (!existingProducts.isEmpty()) {
-                var productOK = ClassMapper.INTANCE.productToDto(product);
-                return productOK;
-            } else {
-                throw new ProductAPIException(HttpStatus.BAD_REQUEST, "No products found for the specified category");
-            }
-        } else {
-            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Category is Null");
-        }
     }
 
 }

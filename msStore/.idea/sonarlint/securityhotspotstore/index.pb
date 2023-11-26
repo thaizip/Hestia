@@ -53,3 +53,5 @@ j
 :src/main/java/hestia/msStore/service/ListaServiceIMPL.java,c\b\cb2f5d46ceec07cf3a04fcefa931b2b3122177ca
 l
 <src/main/java/hestia/msStore/controller/ListaController.java,c\6\c6dd5ba9410d9c12a5403db0679934a53fbb23b8
+g
+7src/main/java/hestia/msStore/payload/ListaResponse.java,c\6\c6be49b407ef0c840c906e0c0ba1d8e93ad0395e

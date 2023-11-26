@@ -1,5 +1,6 @@
 package hestia.msStore.service;
 
+import hestia.msStore.model.Product;
 import hestia.msStore.payload.ListaDto;
 import hestia.msStore.payload.ProductDto;
 
@@ -14,10 +15,10 @@ public interface ListaService {
 
     public ListaDto updateLista(int listaId, ListaDto listaDto);
 
-    public ListaDto addProductsInLista(int listaId, ListaDto listaDto);
+    public ListaDto addProductsInLista(int listaId, int productId);
 
     public void deleteListaById(int listaId);
 
-    public ProductDto getProductById(ProductDto productDto);
+//    public Product getProductById(int productId);
 
 }

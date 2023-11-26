@@ -26,9 +26,10 @@ public class Lista {
     @Column(name = "data")
     private LocalDate data;
 
-    @ManyToMany(mappedBy = "lists")
-    @Column(nullable = false)
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "lista_product",
+            joinColumns = @JoinColumn(name = "lista_id", referencedColumnName = "listaId" ),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
     public int getListaId() {
