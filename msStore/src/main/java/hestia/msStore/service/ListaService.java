@@ -1,8 +1,6 @@
 package hestia.msStore.service;
 
-import hestia.msStore.model.Product;
 import hestia.msStore.payload.ListaDto;
-import hestia.msStore.payload.ProductDto;
 
 import java.util.List;
 
@@ -19,6 +17,6 @@ public interface ListaService {
 
     public void deleteListaById(int listaId);
 
-//    public Product getProductById(int productId);
+    public void deleteProductInLista(int listaId, int productId);
 
 }

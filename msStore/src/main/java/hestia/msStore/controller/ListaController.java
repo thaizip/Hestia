@@ -1,6 +1,7 @@
 package hestia.msStore.controller;
 
 import hestia.msStore.payload.ListaDto;
+import hestia.msStore.payload.ProductDto;
 import hestia.msStore.service.ListaServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,17 @@ public class ListaController {
     public ResponseEntity<ListaDto> addProductsInLista(@PathVariable int listaId, @PathVariable int productId){
         var listaDto = serviceIMPL.addProductsInLista(listaId, productId);
         return new ResponseEntity<>(listaDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{listaId}")
+    public ResponseEntity<String> deleteListaById(@PathVariable(value = "listaId") int listaId){
+        serviceIMPL.deleteListaById(listaId);
+        return new ResponseEntity<>("Lista deleted Successfully",HttpStatus.OK);
+    }
+    @DeleteMapping("/{listaId}/{productId}")
+    public ResponseEntity<String> deleteProductInLista(@PathVariable int listaId, Integer productId){
+        serviceIMPL.deleteProductInLista(listaId, productId);
+        return new ResponseEntity<>("Products deleted Successfully",HttpStatus.OK);
     }
 
 }

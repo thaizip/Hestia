@@ -26,7 +26,6 @@ public class ListaDto {
     @JsonProperty("data")
     private LocalDate data;
 
-//    @NotNull(message = "The products is null")
     @JsonProperty("products")
     private List<ProductDto> products;
 

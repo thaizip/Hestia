@@ -14,13 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ListaServiceIMPL implements ListaService{
+public class ListaServiceIMPL implements ListaService {
 
     private final ListaRepository listaRepository;
 
@@ -63,15 +65,7 @@ public class ListaServiceIMPL implements ListaService{
     @Override
     public ListaDto createLista(ListaDto listaDto) {
         var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-
-        // Save each product before saving the Lista
-        for (Product product : lista.getProducts()) {
-            productRepository.save(product);
-        }
-
-        // Now save the Lista object
         listaRepository.save(lista);
-
         return ClassMapper.INTANCE.listaToDto(lista);
     }
 
@@ -99,13 +93,25 @@ public class ListaServiceIMPL implements ListaService{
         existingList.getProducts().add(searchProduct);
         listaRepository.save(existingList);
         return ClassMapper.INTANCE.listaToDto(existingList);
-
     }
 
 
     @Override
     public void deleteListaById(int listaId) {
+        var existingList = listaRepository.findById(listaId).orElseThrow(
+                () -> new ResourceNotFoundException("Lista", "id", listaId));
 
+        listaRepository.deleteById(existingList.getListaId());
     }
 
+    @Override
+    public void deleteProductInLista(int listaId, int productId) {
+        var existingList = listaRepository.findById(listaId).orElseThrow(
+                () -> new ResourceNotFoundException("Lista", "id", listaId));
+
+        Product searchProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
+
+        existingList.getProducts().remove(searchProduct);
+    }
 }
