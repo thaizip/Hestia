@@ -71,15 +71,13 @@ public class ListaServiceIMPL implements ListaService {
 
     @Override
     public ListaDto updateLista(int listaId, ListaDto listaDto) {
-        var search = listaRepository.findById(listaId);
+        var existingList = listaRepository.findById(listaId).orElseThrow(
+                () -> new ResourceNotFoundException("Lista", "id", listaId));
 
-        if (search.isPresent()) {
-            var lista = ClassMapper.INTANCE.dtoToLista(listaDto);
-            listaRepository.save(lista);
-            return ClassMapper.INTANCE.listaToDto(lista);
-        } else {
-            throw new ProductAPIException(HttpStatus.BAD_REQUEST, "Lista not found");
-        }
+        existingList.setListaName(listaDto.getListaName());
+        existingList.setData(listaDto.getData());
+        listaRepository.save(existingList);
+        return ClassMapper.INTANCE.listaToDto(existingList);
     }
 
     @Override
@@ -113,5 +111,6 @@ public class ListaServiceIMPL implements ListaService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
 
         existingList.getProducts().remove(searchProduct);
+        listaRepository.save(existingList);
     }
 }

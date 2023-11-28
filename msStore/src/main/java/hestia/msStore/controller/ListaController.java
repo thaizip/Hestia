@@ -50,7 +50,7 @@ public class ListaController {
         return new ResponseEntity<>("Lista deleted Successfully",HttpStatus.OK);
     }
     @DeleteMapping("/{listaId}/{productId}")
-    public ResponseEntity<String> deleteProductInLista(@PathVariable int listaId, Integer productId){
+    public ResponseEntity<String> deleteProductInLista(@PathVariable int listaId, @PathVariable int productId){
         serviceIMPL.deleteProductInLista(listaId, productId);
         return new ResponseEntity<>("Products deleted Successfully",HttpStatus.OK);
     }
